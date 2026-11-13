@@ -1,4 +1,5 @@
 import { getStore } from "@netlify/blobs";
+import { notify, esc } from "../lib/notify.mjs";
 const json = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { "Content-Type": "application/json" } });
 
 export default async (req) => {
@@ -14,6 +15,7 @@ export default async (req) => {
     return json({ error: "Add your name, a valid email and a message of at least 10 characters." }, 400);
   const id = `${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
   await getStore("messages").setJSON(id, { id, name, email, topic, message, at: new Date().toISOString() });
+  await notify(`New message: ${topic}`, `<p><b>${esc(name)}</b> (${esc(email)})</p><p>${esc(message).replace(/\n/g, "<br>")}</p>`);
   return json({ ok: true, message: "Message sent. We reply within two working days." });
 };
 export const config = { path: "/api/contact" };

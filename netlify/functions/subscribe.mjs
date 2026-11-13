@@ -1,4 +1,5 @@
 import { getStore } from "@netlify/blobs";
+import { notify, esc } from "../lib/notify.mjs";
 const json = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { "Content-Type": "application/json" } });
 
 export default async (req) => {
@@ -12,6 +13,7 @@ export default async (req) => {
   const store = getStore("subscribers");
   if (await store.get(email)) return json({ ok: true, message: "You're already subscribed." });
   await store.setJSON(email, { email, at: new Date().toISOString() });
+  await notify("New subscriber", `<p>${esc(email)} subscribed to Indus Briefing updates.</p>`);
   return json({ ok: true, message: "Subscribed. We'll email you when new research is published." });
 };
 export const config = { path: "/api/subscribe" };
