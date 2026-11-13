@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Indus Briefing | Blueprints for India’s Strategic Needs</title>
+<meta name="description" content="Indus Briefing designs policy blueprints for India’s frontier regions. Project VISTAR turns vulnerable Northeast border areas into hubs of development, deterrence and dignity.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head><body>
+<header class="top"><div class="wrap">
+<a class="brand" href="#top">Indus Briefing</a>
+<nav aria-label="Main"><a href="#about">About</a><a href="#why">Why it matters</a><a href="#work">Our work</a><a href="#whitepaper">Whitepaper</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main id="top">
+<div class="hero"><canvas id="lattice" aria-hidden="true"></canvas><div class="wrap">
+<h1>India’s strategic future starts at its borders.</h1>
+<p>Project VISTAR transforms vulnerable Northeast regions into hubs of development, deterrence and dignity. Our blueprint is reshaping the frontier, one district at a time.</p>
+<a class="btn" href="#whitepaper">Read the whitepaper</a><a class="btn ghost" href="#subscribe">Get updates</a>
+</div></div>
+
+<section id="why"><div class="wrap">
+<h2>Why it matters</h2><p class="lede">Design targets for Project VISTAR, drawn from the whitepaper.</p>
+<div class="insights">
+<div><b>15–20%</b><span>Reduction in border logistics costs through shared, integrated infrastructure.</span></div>
+<div><b>Up to 40%</b><span>Faster emergency response with integrated roads, health and communication nodes.</span></div>
+<div><b>Tribal-led</b><span>Eco-development that protects cultural identity and keeps communities in charge.</span></div>
+<div><b>Jobs + MSMEs</b><span>Economic growth in remote zones through local employment and small enterprise.</span></div>
+</div></div></section>
+
+<section id="about" class="band"><div class="wrap">
+<h2>About Indus Briefing</h2>
+<p class="lede">Founded in 2025, Indus Briefing is an India-focused intelligence and policy firm. We combine data science, field-level analysis and policy design to give decision-makers blueprints they can act on.</p>
+<h3>VISTAR pilot towns</h3>
+<div class="towns">
+<div><h3>Ziro</h3><small>Arunachal Pradesh</small></div>
+<div><h3>Kibithu</h3><small>Arunachal Pradesh</small></div>
+<div><h3>Chandel</h3><small>Manipur</small></div>
+<div><h3>Dzongu</h3><small>Sikkim</small></div>
+</div></div></section>
+
+<section id="work"><div class="wrap">
+<h2>Our work</h2><p class="lede">Policy projects and consumer intelligence, built on the same analytical core.</p>
+<div class="work">
+<article><span class="tag">Policy · Live</span><h3>Project VISTAR</h3><p>Frontier development blueprint for four pilot towns in the Northeast.</p></article>
+<article><span class="tag">Policy · In development</span><h3>Project NAYAN</h3><p>National AI for Yielding Anomalies &amp; Narratives: AI-assisted detection of patterns across public data.</p></article>
+<article><span class="tag">Policy · In development</span><h3>Election Analytics</h3><p>Constituency-level analysis of electoral data.</p></article>
+<article><span class="tag">Policy · In development</span><h3>Economic Strategy</h3><p>Regional economic planning grounded in local data.</p></article>
+<article><span class="tag">Consumer intelligence</span><h3>Consumer Intelligence Series</h3><p>Dossier-style market reports. The first covers Gen-Z skincare and bodycare. Request a sample below.</p></article>
+</div></div></section>
+
+<section id="whitepaper" class="band"><div class="wrap">
+<h2>Project VISTAR whitepaper</h2>
+<p class="lede">The full blueprint: problem, pilot design, costs and outcomes. Add your PDF at <code>public/whitepaper.pdf</code> and this button goes live.</p>
+<a class="btn" href="whitepaper.pdf">Download the whitepaper (PDF)</a>
+</div></section>
+
+<section id="subscribe"><div class="wrap">
+<h2>Subscribe for updates</h2><p class="lede">One email when we publish new research, launch pilots or release policy insights.</p>
+<form id="sub" novalidate>
+<label>Email address<input type="email" name="email" autocomplete="email" required></label>
+<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button class="btn" type="submit">Subscribe</button><p class="status" role="status"></p>
+</form></div></section>
+
+<section id="contact" class="band"><div class="wrap">
+<h2>Contact</h2><p class="lede">Policy partnerships, research access or consumer report enquiries.</p>
+<form id="con" novalidate>
+<label>Name<input name="name" autocomplete="name" required></label>
+<label>Email<input type="email" name="email" autocomplete="email" required></label>
+<label>Topic<select name="topic"><option>Policy partnership</option><option>Consumer report</option><option>Research access</option><option>General</option></select></label>
+<label>Message<textarea name="message" rows="5" required></textarea></label>
+<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button class="btn" type="submit">Send message</button><p class="status" role="status"></p>
+</form></div></section>
+</main>
+
+<footer><div class="wrap">© 2025 Indus Briefing. Strategic development by the Indus Briefing core team.</div></footer>
+
+<script>
+function wire(id,url){
+  const f=document.getElementById(id),s=f.querySelector(".status"),b=f.querySelector("button");
+  f.addEventListener("submit",async e=>{
+    e.preventDefault();s.className="status";s.textContent="Sending…";b.disabled=true;
+    try{
+      const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.fromEntries(new FormData(f)))});
+      const d=await r.json();
+      s.className="status "+(r.ok?"ok":"err");s.textContent=d.message||d.error||"Something went wrong.";
+      if(r.ok)f.reset();
+    }catch{s.className="status err";s.textContent="Network error. Check your connection and try again."}
+    b.disabled=false;
+  });
+}
+wire("sub","/api/subscribe");wire("con","/api/contact");
+
+// District-node lattice: the one animated element
+(()=>{
+  const c=document.getElementById("lattice"),x=c.getContext("2d");
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  let w,h,n=[];
+  const size=()=>{w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;n=Array.from({length:Math.min(46,w/22|0)},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25}))};
+  size();addEventListener("resize",size);
+  (function tick(){
+    x.clearRect(0,0,w,h);
+    for(const p of n){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1}
+    for(let i=0;i<n.length;i++)for(let j=i+1;j<n.length;j++){
+      const d=Math.hypot(n[i].x-n[j].x,n[i].y-n[j].y);
+      if(d<130){x.strokeStyle=`rgba(200,135,43,${(1-d/130)*.5})`;x.beginPath();x.moveTo(n[i].x,n[i].y);x.lineTo(n[j].x,n[j].y);x.stroke()}
+    }
+    x.fillStyle="#c8872b";for(const p of n){x.beginPath();x.arc(p.x,p.y,2.2,0,6.3);x.fill()}
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+</body></html>
